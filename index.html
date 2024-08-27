@@ -6,7 +6,7 @@
     <title>MAC-Formatierer</title>
     <script>
         function formatMAC() {
-            let mac = document.getElementById("macInput").value;
+            let mac = document.getElementById("macInput").value.trim();
             
             if (mac.length !== 12) {
                 alert("Die MAC-Adresse muss genau 12 Zeichen lang sein.");
@@ -16,6 +16,18 @@
             let formattedMac = mac.match(/.{1,2}/g).join(":");
             document.getElementById("formattedMac").innerText = formattedMac;
         }
+
+        function unformatMAC() {
+            let formattedMac = document.getElementById("formattedMacInput").value.trim();
+            
+            if (formattedMac.length !== 17 || formattedMac.split(":").length !== 6) {
+                alert("Die formatierte MAC-Adresse muss 17 Zeichen lang sein und 5 Doppelpunkte enthalten.");
+                return;
+            }
+
+            let unformattedMac = formattedMac.split(":").join("");
+            document.getElementById("unformattedMac").innerText = unformattedMac;
+        }
     </script>
 </head>
 <body>
@@ -24,5 +36,12 @@
     <input type="text" id="macInput" placeholder="z.B. 001122334455">
     <button onclick="formatMAC()">Formatieren</button>
     <p>Formatierte MAC-Adresse: <span id="formattedMac"></span></p>
+
+    <hr>
+
+    <p>Geben Sie eine formatierte MAC-Adresse ein:</p>
+    <input type="text" id="formattedMacInput" placeholder="z.B. 00:11:22:33:44:55">
+    <button onclick="unformatMAC()">Unformatieren</button>
+    <p>Unformatierte MAC-Adresse: <span id="unformattedMac"></span></p>
 </body>
 </html>
